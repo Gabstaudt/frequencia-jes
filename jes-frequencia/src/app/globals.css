@@ -1,0 +1,151 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #151922;
+  --color-muted: #5b6270;
+  --color-body: #3d4350;
+  --color-line: #e3e6eb;
+  --color-field: #c9cdd6;
+  --color-ground: #f4f5f8;
+  --color-primary: #2341b8;
+  --color-primary-dark: #182f8a;
+  --color-primary-soft: #e8ecfb;
+  --color-primary-ink: #1b2a6b;
+  --color-ok: #155c34;
+  --color-ok-soft: #e4f4ea;
+  --color-warn: #8a4500;
+  --color-warn-soft: #fff1e0;
+  --color-bad: #9b1c12;
+  --color-bad-strong: #b42318;
+  --color-bad-soft: #fdecea;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+html,
+body {
+  background: var(--color-ground);
+  color: var(--color-ink);
+}
+
+@layer components {
+  .btn,
+  .btn-primary,
+  .btn-dark,
+  .btn-secondary,
+  .btn-soft,
+  .btn-danger {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-4 font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .btn-primary {
+    @apply bg-primary text-white hover:bg-primary-dark;
+  }
+  .btn-dark {
+    @apply bg-ink text-white hover:bg-black;
+  }
+  .btn-secondary {
+    @apply border border-field bg-white text-ink hover:bg-ground;
+  }
+  .btn-soft {
+    @apply bg-primary-soft text-primary-ink hover:bg-[#dbe1f8];
+  }
+  .btn-danger {
+    @apply border border-[#e8b4ae] bg-white text-bad hover:bg-bad-soft;
+  }
+  .btn-link {
+    @apply inline-flex min-h-11 items-center font-semibold text-primary hover:text-primary-dark;
+  }
+  .input {
+    @apply h-12 w-full rounded-[10px] border border-field bg-white px-3.5 text-base text-ink outline-none focus:border-primary focus:ring-2 focus:ring-primary/20;
+  }
+  .label {
+    @apply flex flex-col gap-1.5 text-sm font-medium;
+  }
+  .card {
+    @apply rounded-2xl border border-line bg-white;
+  }
+  .badge,
+  .badge-ok,
+  .badge-warn,
+  .badge-bad,
+  .badge-neutral,
+  .badge-info {
+    @apply inline-flex items-center whitespace-nowrap rounded-full px-2.5 py-1 text-xs font-semibold;
+  }
+  .badge-ok {
+    @apply bg-ok-soft text-ok;
+  }
+  .badge-warn {
+    @apply bg-warn-soft text-warn;
+  }
+  .badge-bad {
+    @apply bg-bad-soft text-bad;
+  }
+  .badge-neutral {
+    @apply bg-[#eef0f3] text-body;
+  }
+  .badge-info {
+    @apply bg-primary-soft text-primary-ink;
+  }
+  .h1 {
+    @apply font-display text-2xl font-bold md:text-[28px];
+  }
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-wider text-muted;
+  }
+  .alert-error {
+    @apply rounded-xl bg-bad-soft px-4 py-3 text-sm font-medium text-bad;
+  }
+  .alert-ok {
+    @apply rounded-xl bg-ok-soft px-4 py-3 text-sm font-medium text-ok;
+  }
+  .alert-info {
+    @apply rounded-xl bg-primary-soft px-4 py-3 text-sm text-primary-ink;
+  }
+
+  /* Tabelas que viram cartões no celular */
+  .rtable {
+    @apply w-full border-collapse text-sm;
+  }
+  .rtable th {
+    @apply px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-muted;
+  }
+  .rtable td {
+    @apply border-t border-[#eef0f3] px-4 py-3 align-middle;
+  }
+  @media (max-width: 767px) {
+    .rtable thead {
+      display: none;
+    }
+    .rtable tr {
+      display: block;
+      border-top: 1px solid #eef0f3;
+      padding: 12px 16px;
+    }
+    .rtable td {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      border: 0;
+      padding: 4px 0;
+      text-align: right;
+    }
+    .rtable td::before {
+      content: attr(data-label);
+      color: var(--color-muted);
+      font-size: 12px;
+      font-weight: 600;
+      text-align: left;
+      flex-shrink: 0;
+    }
+    .rtable td.rt-full {
+      display: block;
+      text-align: left;
+    }
+    .rtable td.rt-full::before,
+    .rtable td[data-label=""]::before {
+      content: none;
+    }
+  }
+}
